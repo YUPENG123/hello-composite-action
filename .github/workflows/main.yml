@@ -1,0 +1,22 @@
+name: 测试我的自定义 Action
+
+on: [push] # 代码推送时触发
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 必须先检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. 调用本地的自定义 Action（通过相对路径）
+      - name: 运行自定义 Action
+        id: custom_step
+        uses: ./.my-custom-action # 对应你存放 action.yml 的文件夹路径
+        with:
+          who-to-greet: '张三'
+
+      # 3. 消费自定义 Action 的输出变量
+      - name: 打印 Action 的输出
+        run: echo "Action 的回复是：${{ steps.custom_step.outputs.reply-message }}"
