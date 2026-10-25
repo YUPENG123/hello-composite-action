@@ -1,0 +1,23 @@
+name: 'Hello World Custom Action'
+description: '这是一个打招呼的自定义 Action 示例'
+inputs:
+  who-to-greet:
+    description: '需要打招呼的人名'
+    required: true
+    default: 'GitHub Actions 开发者'
+outputs:
+  reply-message:
+    description: '回应的问候语'
+    value: ${{ steps.set-output.outputs.greeting_reply }}
+
+runs:
+  using: 'composite' # 声明这是一个组合脚本 Action
+  steps:
+    - name: 打印问候
+      run: echo "Hello, ${{ inputs.who-to-greet }}!"
+      shell: bash
+
+    - name: 设置输出参数
+      id: set-output
+      run: echo "greeting_reply=Everything is working great!" >> $GITHUB_OUTPUT
+      shell: bash
