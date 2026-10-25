@@ -13,7 +13,7 @@ jobs:
       # 2. 调用本地的自定义 Action（通过相对路径）
       - name: 运行自定义 Action
         id: custom_step
-        uses: ./.action.yml # 对应你存放 action.yml 的文件夹路径
+        uses: ./action.yml # 对应你存放 action.yml 的文件夹路径
         with:
           who-to-greet: '张三'
 
